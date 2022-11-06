@@ -1,0 +1,70 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+protocol Conference {
+  var numberOfAttendees: Int { get }
+}
+
+struct CocoaHeads : Conference {
+  @_hasStorage @_hasInitialValue let numberOfAttendees: Int { get }
+  init()
+}
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  %2 = integer_literal $Builtin.Int32, 0          // user: %3
+  %3 = struct $Int32 (%2 : $Builtin.Int32)        // user: %4
+  return %3 : $Int32                              // id: %4
+} // end sil function 'main'
+
+// variable initialization expression of CocoaHeads.numberOfAttendees
+sil hidden [transparent] @$s4main10CocoaHeadsV17numberOfAttendeesSivpfi : $@convention(thin) () -> Int {
+bb0:
+  %0 = integer_literal $Builtin.Int64, 0          // user: %1
+  %1 = struct $Int (%0 : $Builtin.Int64)          // user: %2
+  return %1 : $Int                                // id: %2
+} // end sil function '$s4main10CocoaHeadsV17numberOfAttendeesSivpfi'
+
+// CocoaHeads.numberOfAttendees.getter
+sil hidden [transparent] @$s4main10CocoaHeadsV17numberOfAttendeesSivg : $@convention(method) (CocoaHeads) -> Int {
+// %0 "self"                                      // users: %2, %1
+bb0(%0 : $CocoaHeads):
+  debug_value %0 : $CocoaHeads, let, name "self", argno 1, implicit // id: %1
+  %2 = struct_extract %0 : $CocoaHeads, #CocoaHeads.numberOfAttendees // user: %3
+  return %2 : $Int                                // id: %3
+} // end sil function '$s4main10CocoaHeadsV17numberOfAttendeesSivg'
+
+// CocoaHeads.init()
+sil hidden @$s4main10CocoaHeadsVACycfC : $@convention(method) (@thin CocoaHeads.Type) -> CocoaHeads {
+// %0 "$metatype"
+bb0(%0 : $@thin CocoaHeads.Type):
+  %1 = integer_literal $Builtin.Int64, 0          // user: %2
+  %2 = struct $Int (%1 : $Builtin.Int64)          // users: %4, %3
+  %3 = struct $CocoaHeads (%2 : $Int)             // user: %5
+  debug_value %2 : $Int, var, (name "self", loc "src/struct-protocol-conformance-requirements.swift":4:8, scope 0), implicit, type $*CocoaHeads, expr op_fragment:#CocoaHeads.numberOfAttendees // id: %4
+  return %3 : $CocoaHeads                         // id: %5
+} // end sil function '$s4main10CocoaHeadsVACycfC'
+
+// protocol witness for Conference.numberOfAttendees.getter in conformance CocoaHeads
+sil private [transparent] [thunk] @$s4main10CocoaHeadsVAA10ConferenceA2aDP17numberOfAttendeesSivgTW : $@convention(witness_method: Conference) (@in_guaranteed CocoaHeads) -> Int {
+// %0                                             // user: %1
+bb0(%0 : $*CocoaHeads):
+  %1 = struct_element_addr %0 : $*CocoaHeads, #CocoaHeads.numberOfAttendees // user: %2
+  %2 = load %1 : $*Int                            // user: %3
+  return %2 : $Int                                // id: %3
+} // end sil function '$s4main10CocoaHeadsVAA10ConferenceA2aDP17numberOfAttendeesSivgTW'
+
+sil_witness_table hidden CocoaHeads: Conference module main {
+  method #Conference.numberOfAttendees!getter: <Self where Self : Conference> (Self) -> () -> Int : @$s4main10CocoaHeadsVAA10ConferenceA2aDP17numberOfAttendeesSivgTW	// protocol witness for Conference.numberOfAttendees.getter in conformance CocoaHeads
+}
+
+
+
+// Mappings from '#fileID' to '#filePath':
+//   'main/struct-protocol-conformance-requirements.swift' => 'src/struct-protocol-conformance-requirements.swift'
+
+

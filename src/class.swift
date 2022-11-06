@@ -1,0 +1,3 @@
+class CocoaHeads {
+  func organise() {}
+}

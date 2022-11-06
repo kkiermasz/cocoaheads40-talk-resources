@@ -1,0 +1,38 @@
+sil_stage canonical
+
+import Builtin
+import Swift
+import SwiftShims
+
+protocol Conference {
+}
+
+struct CocoaHeads : Conference {
+  init()
+}
+
+// main
+sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
+bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
+  %2 = integer_literal $Builtin.Int32, 0          // user: %3
+  %3 = struct $Int32 (%2 : $Builtin.Int32)        // user: %4
+  return %3 : $Int32                              // id: %4
+} // end sil function 'main'
+
+// CocoaHeads.init()
+sil hidden @$s4main10CocoaHeadsVACycfC : $@convention(method) (@thin CocoaHeads.Type) -> CocoaHeads {
+// %0 "$metatype"
+bb0(%0 : $@thin CocoaHeads.Type):
+  %1 = struct $CocoaHeads ()                      // user: %2
+  return %1 : $CocoaHeads                         // id: %2
+} // end sil function '$s4main10CocoaHeadsVACycfC'
+
+sil_witness_table hidden CocoaHeads: Conference module main {
+}
+
+
+
+// Mappings from '#fileID' to '#filePath':
+//   'main/struct-protocol-conformance-empty.swift' => 'src/struct-protocol-conformance-empty.swift'
+
+
