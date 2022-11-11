@@ -62,8 +62,8 @@ sil hidden [signature_optimized_thunk] [always_inline] @$s4main8organiseyyAA10Co
 bb0(%0 : $*Conference):
   // function_ref specialized organise(_:)
   %1 = function_ref @$s4main8organiseyyAA10Conference_pFTf4e_n : $@convention(thin) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // user: %3
-  %2 = open_existential_addr immutable_access %0 : $*Conference to $*@opened("DBFAB2B8-60FA-11ED-9C6C-96B3AA0BE17C") Conference // users: %3, %3
-  %3 = apply %1<@opened("DBFAB2B8-60FA-11ED-9C6C-96B3AA0BE17C") Conference>(%2) : $@convention(thin) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %2; user: %4
+  %2 = open_existential_addr immutable_access %0 : $*Conference to $*@opened("87C3F304-61D0-11ED-A75A-96B3AA0BE17C") Conference // users: %3, %3
+  %3 = apply %1<@opened("87C3F304-61D0-11ED-A75A-96B3AA0BE17C") Conference>(%2) : $@convention(thin) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %2; user: %4
   return %3 : $()                                 // id: %4
 } // end sil function '$s4main8organiseyyAA10Conference_pF'
 
