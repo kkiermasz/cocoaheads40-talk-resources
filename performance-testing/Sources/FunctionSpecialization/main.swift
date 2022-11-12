@@ -1,41 +1,39 @@
 import Foundation
 import QuartzCore
 
-protocol Conference {
-  init()
+protocol Testable {
+    init()
 }
 
-struct CocoaHeads: Conference {
-  init() {
-    _ = UUID()
-    _ = UUID()
-  }
+final class TestingClass: Testable {}
+//struct TestingClass: Testable {}
+
+func action<T: Testable>(_ item: T) {
+    var array: Array<T> = []
+
+    for _ in 0..<100000 {
+        array.append(item)
+    }
 }
 
-func unspecialized(_ val: any Conference) {
-  var array: Array<Conference> = []
-  for _ in 0..<10000 {
-    array.append(val)
-  }
-}
+func actionDynamic(_ item: Testable) {
+    var array: Array<Testable> = []
 
-func specialized<ConferenceType: Conference>(_ val: ConferenceType) {
-  var array: Array<ConferenceType> = []
-  for _ in 0..<10000 {
-    array.append(val)
-  }
-}
-
-let staticTime = timeOfRun {
-  let val = CocoaHeads()
-  specialized(val)
+    for _ in 0..<100000 {
+        array.append(item)
+    }
 }
 
 let dynamicTime = timeOfRun {
-  let val = CocoaHeads()
-  unspecialized(val)
+    actionDynamic(TestingClass())
 }
 
+let staticTime = timeOfRun {
+    action(TestingClass())
+}
+
+print(staticTime)
+print(dynamicTime)
 print("Unspecialized function is \(dynamicTime / staticTime) times slower than specialized")
 
 func timeOfRun(_ function: () -> ()) -> Double {

@@ -5,11 +5,21 @@ let package = Package(
   name: "MyPackage",
   products: [
     .executable(name: "function-specialization", targets: ["FunctionSpecialization"]),
+    .executable(name: "precomputation", targets: ["Precomputation"]),
+    .executable(name: "inheritance-overriden", targets: ["InheritanceOverriden"]),
   ],
   dependencies: [],
   targets: [
     .executableTarget(
       name: "FunctionSpecialization",
+      dependencies: []
+    ),
+    .executableTarget(
+      name: "Precomputation",
+      dependencies: []
+    ),
+    .executableTarget(
+      name: "InheritanceOverriden",
       dependencies: []
     ),
   ]
