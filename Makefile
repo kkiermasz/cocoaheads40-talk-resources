@@ -47,4 +47,4 @@ swimmer:
 	swiftc -emit-sil -O src/swimmer.swift > out/swimmer.sil
 
 protocol-extension:
-	swiftc -emit-sil -O src/protocol-extension.swift > out/protocol-extension.sil
+	swiftc -emit-sil -Onone src/protocol-extension.swift > out/protocol-extension.sil
