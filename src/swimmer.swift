@@ -3,10 +3,6 @@ protocol Swimmer {
 }
 
 struct Duck: Swimmer {
-  let foo = "fasdfsad"
-  let goo = "fads"
-  let hoo = "fasdfsd"
-  let joo = "fdsafsdafdsf"
   func swim() {}
 }
 

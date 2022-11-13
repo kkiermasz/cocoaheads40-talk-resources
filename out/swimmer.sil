@@ -9,10 +9,6 @@ protocol Swimmer {
 }
 
 struct Duck : Swimmer {
-  @_hasStorage @_hasInitialValue let foo: String { get }
-  @_hasStorage @_hasInitialValue let goo: String { get }
-  @_hasStorage @_hasInitialValue let hoo: String { get }
-  @_hasStorage @_hasInitialValue let joo: String { get }
   func swim()
   init()
 }
@@ -31,12 +27,12 @@ sil_global hidden [let] @$s7swimmer8swimmersSayAA7Swimmer_pGvp : $Array<Swimmer>
 sil @main : $@convention(c) (Int32, UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>) -> Int32 {
 bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>>):
   alloc_global @$s7swimmer8swimmersSayAA7Swimmer_pGvp // id: %2
-  %3 = global_addr @$s7swimmer8swimmersSayAA7Swimmer_pGvp : $*Array<Swimmer> // user: %87
+  %3 = global_addr @$s7swimmer8swimmersSayAA7Swimmer_pGvp : $*Array<Swimmer> // user: %34
   %4 = integer_literal $Builtin.Word, 3           // user: %7
   %5 = integer_literal $Builtin.Int64, 3          // user: %6
   %6 = struct $Int (%5 : $Builtin.Int64)          // user: %12
   %7 = alloc_ref [tail_elems $Swimmer * %4 : $Builtin.Word] $_ContiguousArrayStorage<Swimmer> // user: %8
-  %8 = move_value [lexical] %7 : $_ContiguousArrayStorage<Swimmer> // users: %82, %9
+  %8 = move_value [lexical] %7 : $_ContiguousArrayStorage<Swimmer> // users: %29, %9
   %9 = upcast %8 : $_ContiguousArrayStorage<Swimmer> to $__ContiguousArrayStorageBase // users: %16, %14
   %10 = integer_literal $Builtin.Int64, 6         // user: %11
   %11 = struct $UInt (%10 : $Builtin.Int64)       // user: %12
@@ -44,190 +40,32 @@ bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>
   %13 = struct $_ArrayBody (%12 : $_SwiftArrayBodyStorage) // user: %15
   %14 = ref_element_addr %9 : $__ContiguousArrayStorageBase, #__ContiguousArrayStorageBase.countAndCapacity // user: %15
   store %13 to %14 : $*_ArrayBody                 // id: %15
-  %16 = ref_tail_addr %9 : $__ContiguousArrayStorageBase, $Swimmer // users: %58, %61, %78
-  %17 = alloc_stack [lexical] $Duck, var, name "self", implicit // users: %57, %54, %45, %36, %27, %18
-  %18 = struct_element_addr %17 : $*Duck, #Duck.foo // user: %26
-  %19 = integer_literal $Builtin.Int64, 7233189360142868838 // user: %20
-  %20 = struct $UInt64 (%19 : $Builtin.Int64)     // user: %23
-  %21 = integer_literal $Builtin.Int64, -1729382256910270464 // user: %22
-  %22 = value_to_bridge_object %21 : $Builtin.Int64 // user: %23
-  %23 = struct $_StringObject (%20 : $UInt64, %22 : $Builtin.BridgeObject) // user: %24
-  %24 = struct $_StringGuts (%23 : $_StringObject) // user: %25
-  %25 = struct $String (%24 : $_StringGuts)       // users: %64, %56, %26
-  store %25 to %18 : $*String                     // id: %26
-  %27 = struct_element_addr %17 : $*Duck, #Duck.goo // user: %35
-  %28 = integer_literal $Builtin.Int64, 1935958374 // user: %29
-  %29 = struct $UInt64 (%28 : $Builtin.Int64)     // user: %32
-  %30 = integer_literal $Builtin.Int64, -2017612633061982208 // user: %31
-  %31 = value_to_bridge_object %30 : $Builtin.Int64 // user: %32
-  %32 = struct $_StringObject (%29 : $UInt64, %31 : $Builtin.BridgeObject) // user: %33
-  %33 = struct $_StringGuts (%32 : $_StringObject) // user: %34
-  %34 = struct $String (%33 : $_StringGuts)       // users: %66, %56, %35
-  store %34 to %27 : $*String                     // id: %35
-  %36 = struct_element_addr %17 : $*Duck, #Duck.hoo // user: %44
-  %37 = integer_literal $Builtin.Int64, 28274381280207206 // user: %38
-  %38 = struct $UInt64 (%37 : $Builtin.Int64)     // user: %41
-  %39 = integer_literal $Builtin.Int64, -1801439850948198400 // user: %40
-  %40 = value_to_bridge_object %39 : $Builtin.Int64 // user: %41
-  %41 = struct $_StringObject (%38 : $UInt64, %40 : $Builtin.BridgeObject) // user: %42
-  %42 = struct $_StringGuts (%41 : $_StringObject) // user: %43
-  %43 = struct $String (%42 : $_StringGuts)       // users: %68, %56, %44
-  store %43 to %36 : $*String                     // id: %44
-  %45 = struct_element_addr %17 : $*Duck, #Duck.joo // user: %53
-  %46 = integer_literal $Builtin.Int64, 7017861002908886118 // user: %47
-  %47 = struct $UInt64 (%46 : $Builtin.Int64)     // user: %50
-  %48 = integer_literal $Builtin.Int64, -1441151879039720346 // user: %49
-  %49 = value_to_bridge_object %48 : $Builtin.Int64 // user: %50
-  %50 = struct $_StringObject (%47 : $UInt64, %49 : $Builtin.BridgeObject) // user: %51
-  %51 = struct $_StringGuts (%50 : $_StringObject) // user: %52
-  %52 = struct $String (%51 : $_StringGuts)       // users: %70, %56, %53
-  store %52 to %45 : $*String                     // id: %53
-  %54 = load %17 : $*Duck                         // user: %55
-  release_value %54 : $Duck                       // id: %55
-  %56 = struct $Duck (%25 : $String, %34 : $String, %43 : $String, %52 : $String) // users: %90, %72, %76, %59
-  dealloc_stack %17 : $*Duck                      // id: %57
-  %58 = init_existential_addr %16 : $*Swimmer, $Duck // user: %59
-  store %56 to %58 : $*Duck                       // id: %59
-  %60 = integer_literal $Builtin.Word, 1          // user: %61
-  %61 = index_addr %16 : $*Swimmer, %60 : $Builtin.Word // user: %75
-  %62 = alloc_stack [lexical] $Duck, var, name "self", implicit // users: %74, %71, %69, %67, %65, %63
-  %63 = struct_element_addr %62 : $*Duck, #Duck.foo // user: %64
-  store %25 to %63 : $*String                     // id: %64
-  %65 = struct_element_addr %62 : $*Duck, #Duck.goo // user: %66
-  store %34 to %65 : $*String                     // id: %66
-  %67 = struct_element_addr %62 : $*Duck, #Duck.hoo // user: %68
-  store %43 to %67 : $*String                     // id: %68
-  %69 = struct_element_addr %62 : $*Duck, #Duck.joo // user: %70
-  store %52 to %69 : $*String                     // id: %70
-  %71 = load %62 : $*Duck                         // user: %73
-  retain_value %56 : $Duck                        // id: %72
-  release_value %71 : $Duck                       // id: %73
-  dealloc_stack %62 : $*Duck                      // id: %74
-  %75 = init_existential_addr %61 : $*Swimmer, $Duck // user: %76
-  store %56 to %75 : $*Duck                       // id: %76
-  %77 = integer_literal $Builtin.Word, 2          // user: %78
-  %78 = index_addr %16 : $*Swimmer, %77 : $Builtin.Word // user: %80
-  %79 = struct $Fish ()                           // user: %81
-  %80 = init_existential_addr %78 : $*Swimmer, $Fish // user: %81
-  store %79 to %80 : $*Fish                       // id: %81
-  %82 = end_cow_mutation %8 : $_ContiguousArrayStorage<Swimmer> // user: %83
-  %83 = unchecked_ref_cast %82 : $_ContiguousArrayStorage<Swimmer> to $Builtin.BridgeObject // user: %84
-  %84 = struct $_BridgeStorage<__ContiguousArrayStorageBase> (%83 : $Builtin.BridgeObject) // user: %85
-  %85 = struct $_ArrayBuffer<Swimmer> (%84 : $_BridgeStorage<__ContiguousArrayStorageBase>) // user: %86
-  %86 = struct $Array<Swimmer> (%85 : $_ArrayBuffer<Swimmer>) // user: %87
-  store %86 to %3 : $*Array<Swimmer>              // id: %87
-  %88 = integer_literal $Builtin.Int32, 0         // user: %89
-  %89 = struct $Int32 (%88 : $Builtin.Int32)      // user: %91
-  retain_value %56 : $Duck                        // id: %90
-  return %89 : $Int32                             // id: %91
+  %16 = ref_tail_addr %9 : $__ContiguousArrayStorageBase, $Swimmer // users: %18, %21, %25
+  %17 = struct $Duck ()                           // users: %23, %19
+  %18 = init_existential_addr %16 : $*Swimmer, $Duck // user: %19
+  store %17 to %18 : $*Duck                       // id: %19
+  %20 = integer_literal $Builtin.Word, 1          // user: %21
+  %21 = index_addr %16 : $*Swimmer, %20 : $Builtin.Word // user: %22
+  %22 = init_existential_addr %21 : $*Swimmer, $Duck // user: %23
+  store %17 to %22 : $*Duck                       // id: %23
+  %24 = integer_literal $Builtin.Word, 2          // user: %25
+  %25 = index_addr %16 : $*Swimmer, %24 : $Builtin.Word // user: %27
+  %26 = struct $Fish ()                           // user: %28
+  %27 = init_existential_addr %25 : $*Swimmer, $Fish // user: %28
+  store %26 to %27 : $*Fish                       // id: %28
+  %29 = end_cow_mutation %8 : $_ContiguousArrayStorage<Swimmer> // user: %30
+  %30 = unchecked_ref_cast %29 : $_ContiguousArrayStorage<Swimmer> to $Builtin.BridgeObject // user: %31
+  %31 = struct $_BridgeStorage<__ContiguousArrayStorageBase> (%30 : $Builtin.BridgeObject) // user: %32
+  %32 = struct $_ArrayBuffer<Swimmer> (%31 : $_BridgeStorage<__ContiguousArrayStorageBase>) // user: %33
+  %33 = struct $Array<Swimmer> (%32 : $_ArrayBuffer<Swimmer>) // user: %34
+  store %33 to %3 : $*Array<Swimmer>              // id: %34
+  %35 = integer_literal $Builtin.Int32, 0         // user: %36
+  %36 = struct $Int32 (%35 : $Builtin.Int32)      // user: %37
+  return %36 : $Int32                             // id: %37
 } // end sil function 'main'
 
-// variable initialization expression of Duck.foo
-sil hidden [transparent] @$s7swimmer4DuckV3fooSSvpfi : $@convention(thin) () -> @owned String {
-bb0:
-  %0 = integer_literal $Builtin.Int64, 7233189360142868838 // user: %1
-  %1 = struct $UInt64 (%0 : $Builtin.Int64)       // user: %4
-  %2 = integer_literal $Builtin.Int64, -1729382256910270464 // user: %3
-  %3 = value_to_bridge_object %2 : $Builtin.Int64 // user: %4
-  %4 = struct $_StringObject (%1 : $UInt64, %3 : $Builtin.BridgeObject) // user: %5
-  %5 = struct $_StringGuts (%4 : $_StringObject)  // user: %6
-  %6 = struct $String (%5 : $_StringGuts)         // user: %7
-  return %6 : $String                             // id: %7
-} // end sil function '$s7swimmer4DuckV3fooSSvpfi'
-
-// Duck.foo.getter
-sil hidden [transparent] @$s7swimmer4DuckV3fooSSvg : $@convention(method) (@guaranteed Duck) -> @owned String {
-// %0 "self"                                      // users: %2, %1
-bb0(%0 : $Duck):
-  debug_value %0 : $Duck, let, name "self", argno 1, implicit // id: %1
-  %2 = struct_extract %0 : $Duck, #Duck.foo       // users: %3, %7
-  %3 = struct_extract %2 : $String, #String._guts // user: %4
-  %4 = struct_extract %3 : $_StringGuts, #_StringGuts._object // user: %5
-  %5 = struct_extract %4 : $_StringObject, #_StringObject._object // user: %6
-  strong_retain %5 : $Builtin.BridgeObject        // id: %6
-  return %2 : $String                             // id: %7
-} // end sil function '$s7swimmer4DuckV3fooSSvg'
-
-// variable initialization expression of Duck.goo
-sil hidden [transparent] @$s7swimmer4DuckV3gooSSvpfi : $@convention(thin) () -> @owned String {
-bb0:
-  %0 = integer_literal $Builtin.Int64, 1935958374 // user: %1
-  %1 = struct $UInt64 (%0 : $Builtin.Int64)       // user: %4
-  %2 = integer_literal $Builtin.Int64, -2017612633061982208 // user: %3
-  %3 = value_to_bridge_object %2 : $Builtin.Int64 // user: %4
-  %4 = struct $_StringObject (%1 : $UInt64, %3 : $Builtin.BridgeObject) // user: %5
-  %5 = struct $_StringGuts (%4 : $_StringObject)  // user: %6
-  %6 = struct $String (%5 : $_StringGuts)         // user: %7
-  return %6 : $String                             // id: %7
-} // end sil function '$s7swimmer4DuckV3gooSSvpfi'
-
-// Duck.goo.getter
-sil hidden [transparent] @$s7swimmer4DuckV3gooSSvg : $@convention(method) (@guaranteed Duck) -> @owned String {
-// %0 "self"                                      // users: %2, %1
-bb0(%0 : $Duck):
-  debug_value %0 : $Duck, let, name "self", argno 1, implicit // id: %1
-  %2 = struct_extract %0 : $Duck, #Duck.goo       // users: %3, %7
-  %3 = struct_extract %2 : $String, #String._guts // user: %4
-  %4 = struct_extract %3 : $_StringGuts, #_StringGuts._object // user: %5
-  %5 = struct_extract %4 : $_StringObject, #_StringObject._object // user: %6
-  strong_retain %5 : $Builtin.BridgeObject        // id: %6
-  return %2 : $String                             // id: %7
-} // end sil function '$s7swimmer4DuckV3gooSSvg'
-
-// variable initialization expression of Duck.hoo
-sil hidden [transparent] @$s7swimmer4DuckV3hooSSvpfi : $@convention(thin) () -> @owned String {
-bb0:
-  %0 = integer_literal $Builtin.Int64, 28274381280207206 // user: %1
-  %1 = struct $UInt64 (%0 : $Builtin.Int64)       // user: %4
-  %2 = integer_literal $Builtin.Int64, -1801439850948198400 // user: %3
-  %3 = value_to_bridge_object %2 : $Builtin.Int64 // user: %4
-  %4 = struct $_StringObject (%1 : $UInt64, %3 : $Builtin.BridgeObject) // user: %5
-  %5 = struct $_StringGuts (%4 : $_StringObject)  // user: %6
-  %6 = struct $String (%5 : $_StringGuts)         // user: %7
-  return %6 : $String                             // id: %7
-} // end sil function '$s7swimmer4DuckV3hooSSvpfi'
-
-// Duck.hoo.getter
-sil hidden [transparent] @$s7swimmer4DuckV3hooSSvg : $@convention(method) (@guaranteed Duck) -> @owned String {
-// %0 "self"                                      // users: %2, %1
-bb0(%0 : $Duck):
-  debug_value %0 : $Duck, let, name "self", argno 1, implicit // id: %1
-  %2 = struct_extract %0 : $Duck, #Duck.hoo       // users: %3, %7
-  %3 = struct_extract %2 : $String, #String._guts // user: %4
-  %4 = struct_extract %3 : $_StringGuts, #_StringGuts._object // user: %5
-  %5 = struct_extract %4 : $_StringObject, #_StringObject._object // user: %6
-  strong_retain %5 : $Builtin.BridgeObject        // id: %6
-  return %2 : $String                             // id: %7
-} // end sil function '$s7swimmer4DuckV3hooSSvg'
-
-// variable initialization expression of Duck.joo
-sil hidden [transparent] @$s7swimmer4DuckV3jooSSvpfi : $@convention(thin) () -> @owned String {
-bb0:
-  %0 = integer_literal $Builtin.Int64, 7017861002908886118 // user: %1
-  %1 = struct $UInt64 (%0 : $Builtin.Int64)       // user: %4
-  %2 = integer_literal $Builtin.Int64, -1441151879039720346 // user: %3
-  %3 = value_to_bridge_object %2 : $Builtin.Int64 // user: %4
-  %4 = struct $_StringObject (%1 : $UInt64, %3 : $Builtin.BridgeObject) // user: %5
-  %5 = struct $_StringGuts (%4 : $_StringObject)  // user: %6
-  %6 = struct $String (%5 : $_StringGuts)         // user: %7
-  return %6 : $String                             // id: %7
-} // end sil function '$s7swimmer4DuckV3jooSSvpfi'
-
-// Duck.joo.getter
-sil hidden [transparent] @$s7swimmer4DuckV3jooSSvg : $@convention(method) (@guaranteed Duck) -> @owned String {
-// %0 "self"                                      // users: %2, %1
-bb0(%0 : $Duck):
-  debug_value %0 : $Duck, let, name "self", argno 1, implicit // id: %1
-  %2 = struct_extract %0 : $Duck, #Duck.joo       // users: %3, %7
-  %3 = struct_extract %2 : $String, #String._guts // user: %4
-  %4 = struct_extract %3 : $_StringGuts, #_StringGuts._object // user: %5
-  %5 = struct_extract %4 : $_StringObject, #_StringObject._object // user: %6
-  strong_retain %5 : $Builtin.BridgeObject        // id: %6
-  return %2 : $String                             // id: %7
-} // end sil function '$s7swimmer4DuckV3jooSSvg'
-
 // Duck.swim()
-sil hidden @$s7swimmer4DuckV4swimyyF : $@convention(method) (@guaranteed Duck) -> () {
+sil hidden @$s7swimmer4DuckV4swimyyF : $@convention(method) (Duck) -> () {
 // %0 "self"                                      // user: %1
 bb0(%0 : $Duck):
   debug_value %0 : $Duck, let, name "self", argno 1, implicit // id: %1
@@ -236,52 +74,11 @@ bb0(%0 : $Duck):
 } // end sil function '$s7swimmer4DuckV4swimyyF'
 
 // Duck.init()
-sil hidden [signature_optimized_thunk] [always_inline] @$s7swimmer4DuckVACycfC : $@convention(method) (@thin Duck.Type) -> @owned Duck {
+sil hidden @$s7swimmer4DuckVACycfC : $@convention(method) (@thin Duck.Type) -> Duck {
 // %0 "$metatype"
 bb0(%0 : $@thin Duck.Type):
-  %1 = alloc_stack [lexical] $Duck, var, name "self", implicit // users: %41, %38, %29, %20, %11, %2
-  %2 = struct_element_addr %1 : $*Duck, #Duck.foo // user: %10
-  %3 = integer_literal $Builtin.Int64, 7233189360142868838 // user: %4
-  %4 = struct $UInt64 (%3 : $Builtin.Int64)       // user: %7
-  %5 = integer_literal $Builtin.Int64, -1729382256910270464 // user: %6
-  %6 = value_to_bridge_object %5 : $Builtin.Int64 // user: %7
-  %7 = struct $_StringObject (%4 : $UInt64, %6 : $Builtin.BridgeObject) // user: %8
-  %8 = struct $_StringGuts (%7 : $_StringObject)  // user: %9
-  %9 = struct $String (%8 : $_StringGuts)         // users: %40, %10
-  store %9 to %2 : $*String                       // id: %10
-  %11 = struct_element_addr %1 : $*Duck, #Duck.goo // user: %19
-  %12 = integer_literal $Builtin.Int64, 1935958374 // user: %13
-  %13 = struct $UInt64 (%12 : $Builtin.Int64)     // user: %16
-  %14 = integer_literal $Builtin.Int64, -2017612633061982208 // user: %15
-  %15 = value_to_bridge_object %14 : $Builtin.Int64 // user: %16
-  %16 = struct $_StringObject (%13 : $UInt64, %15 : $Builtin.BridgeObject) // user: %17
-  %17 = struct $_StringGuts (%16 : $_StringObject) // user: %18
-  %18 = struct $String (%17 : $_StringGuts)       // users: %40, %19
-  store %18 to %11 : $*String                     // id: %19
-  %20 = struct_element_addr %1 : $*Duck, #Duck.hoo // user: %28
-  %21 = integer_literal $Builtin.Int64, 28274381280207206 // user: %22
-  %22 = struct $UInt64 (%21 : $Builtin.Int64)     // user: %25
-  %23 = integer_literal $Builtin.Int64, -1801439850948198400 // user: %24
-  %24 = value_to_bridge_object %23 : $Builtin.Int64 // user: %25
-  %25 = struct $_StringObject (%22 : $UInt64, %24 : $Builtin.BridgeObject) // user: %26
-  %26 = struct $_StringGuts (%25 : $_StringObject) // user: %27
-  %27 = struct $String (%26 : $_StringGuts)       // users: %40, %28
-  store %27 to %20 : $*String                     // id: %28
-  %29 = struct_element_addr %1 : $*Duck, #Duck.joo // user: %37
-  %30 = integer_literal $Builtin.Int64, 7017861002908886118 // user: %31
-  %31 = struct $UInt64 (%30 : $Builtin.Int64)     // user: %34
-  %32 = integer_literal $Builtin.Int64, -1441151879039720346 // user: %33
-  %33 = value_to_bridge_object %32 : $Builtin.Int64 // user: %34
-  %34 = struct $_StringObject (%31 : $UInt64, %33 : $Builtin.BridgeObject) // user: %35
-  %35 = struct $_StringGuts (%34 : $_StringObject) // user: %36
-  %36 = struct $String (%35 : $_StringGuts)       // users: %40, %37
-  store %36 to %29 : $*String                     // id: %37
-  %38 = load %1 : $*Duck                          // user: %39
-  release_value %38 : $Duck                       // id: %39
-  %40 = struct $Duck (%9 : $String, %18 : $String, %27 : $String, %36 : $String) // users: %42, %43
-  dealloc_stack %1 : $*Duck                       // id: %41
-  retain_value %40 : $Duck                        // id: %42
-  return %40 : $Duck                              // id: %43
+  %1 = struct $Duck ()                            // user: %2
+  return %1 : $Duck                               // id: %2
 } // end sil function '$s7swimmer4DuckVACycfC'
 
 // protocol witness for Swimmer.swim() in conformance Duck
