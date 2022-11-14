@@ -2,39 +2,39 @@ import Foundation
 import QuartzCore
 
 protocol Testable {
-    init()
+  init()
 }
 
 final class TestingClass: Testable {}
 //struct TestingClass: Testable {}
 
-func action<T: Testable>(_ item: T) {
-    var array: Array<T> = []
-
-    for _ in 0..<100000 {
-        array.append(item)
-    }
+func specializedAction<T: Testable>(_ item: T) {
+  var array: Array<T> = []
+  
+  for _ in 0..<100000 {
+    array.append(item)
+  }
 }
 
-func actionDynamic(_ item: Testable) {
-    var array: Array<Testable> = []
-
-    for _ in 0..<100000 {
-        array.append(item)
-    }
+func unspecializedAction(_ item: any Testable) {
+  var array: Array<Testable> = []
+  
+  for _ in 0..<100000 {
+    array.append(item)
+  }
 }
 
-let dynamicTime = timeOfRun {
-    actionDynamic(TestingClass())
+let unspecializedTime = timeOfRun {
+  unspecializedAction(TestingClass())
 }
 
-let staticTime = timeOfRun {
-    action(TestingClass())
+let specializedTime = timeOfRun {
+  specializedAction(TestingClass())
 }
 
-print(staticTime)
-print(dynamicTime)
-print("Unspecialized function is \(dynamicTime / staticTime) times slower than specialized")
+print(specializedTime)
+print(unspecializedTime)
+print("Unspecialized function is \(unspecializedTime / specializedTime) times slower than specialized")
 
 func timeOfRun(_ function: () -> ()) -> Double {
   let timeBefore = CACurrentMediaTime()
