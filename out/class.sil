@@ -4,7 +4,11 @@ import Builtin
 import Swift
 import SwiftShims
 
-class CocoaHeads {
+protocol Conference {
+  func organise()
+}
+
+class CocoaHeads : Conference {
   func organise()
   @objc deinit
   init()
@@ -64,10 +68,25 @@ bb0(%0 : $CocoaHeads):
   return %0 : $CocoaHeads                         // id: %2
 } // end sil function '$s5class10CocoaHeadsCACycfc'
 
+// protocol witness for Conference.organise() in conformance CocoaHeads
+sil private [transparent] [thunk] @$s5class10CocoaHeadsCAA10ConferenceA2aDP8organiseyyFTW : $@convention(witness_method: Conference) (@in_guaranteed CocoaHeads) -> () {
+// %0                                             // user: %1
+bb0(%0 : $*CocoaHeads):
+  %1 = load %0 : $*CocoaHeads                     // users: %2, %3
+  %2 = class_method %1 : $CocoaHeads, #CocoaHeads.organise : (CocoaHeads) -> () -> (), $@convention(method) (@guaranteed CocoaHeads) -> () // user: %3
+  %3 = apply %2(%1) : $@convention(method) (@guaranteed CocoaHeads) -> ()
+  %4 = tuple ()                                   // user: %5
+  return %4 : $()                                 // id: %5
+} // end sil function '$s5class10CocoaHeadsCAA10ConferenceA2aDP8organiseyyFTW'
+
 sil_vtable CocoaHeads {
   #CocoaHeads.organise: (CocoaHeads) -> () -> () : @$s5class10CocoaHeadsC8organiseyyF	// CocoaHeads.organise()
   #CocoaHeads.init!allocator: (CocoaHeads.Type) -> () -> CocoaHeads : @$s5class10CocoaHeadsCACycfC	// CocoaHeads.__allocating_init()
   #CocoaHeads.deinit!deallocator: @$s5class10CocoaHeadsCfD	// CocoaHeads.__deallocating_deinit
+}
+
+sil_witness_table hidden CocoaHeads: Conference module class {
+  method #Conference.organise: <Self where Self : Conference> (Self) -> () -> () : @$s5class10CocoaHeadsCAA10ConferenceA2aDP8organiseyyFTW	// protocol witness for Conference.organise() in conformance CocoaHeads
 }
 
 

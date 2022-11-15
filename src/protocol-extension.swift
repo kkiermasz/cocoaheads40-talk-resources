@@ -1,9 +1,9 @@
 protocol Conference {
-	func foo()
+  func foo()
 }
 
 extension Conference {
-	func foo() { print("Conference foo") }
+  func foo() { print("Conference foo") }
   func goo() { print("Conference goo") }
 }
 

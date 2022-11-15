@@ -32,9 +32,9 @@ bb0(%0 : $Int32, %1 : $UnsafeMutablePointer<Optional<UnsafeMutablePointer<Int8>>
   %4 = struct $CocoaHeads ()                      // user: %6
   %5 = init_existential_addr %3 : $*Conference, $CocoaHeads // user: %6
   store %4 to %5 : $*CocoaHeads                   // id: %6
-  %7 = open_existential_addr immutable_access %3 : $*Conference to $*@opened("B1541DD6-641C-11ED-B0B1-96B3AA0BE17C") Conference // users: %9, %9, %8
-  %8 = witness_method $@opened("B1541DD6-641C-11ED-B0B1-96B3AA0BE17C") Conference, #Conference.foo : <Self where Self : Conference> (Self) -> () -> (), %7 : $*@opened("B1541DD6-641C-11ED-B0B1-96B3AA0BE17C") Conference : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %7; user: %9
-  %9 = apply %8<@opened("B1541DD6-641C-11ED-B0B1-96B3AA0BE17C") Conference>(%7) : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %7
+  %7 = open_existential_addr immutable_access %3 : $*Conference to $*@opened("E6CA508C-64FA-11ED-A475-96B3AA0BE17C") Conference // users: %9, %9, %8
+  %8 = witness_method $@opened("E6CA508C-64FA-11ED-A475-96B3AA0BE17C") Conference, #Conference.foo : <Self where Self : Conference> (Self) -> () -> (), %7 : $*@opened("E6CA508C-64FA-11ED-A475-96B3AA0BE17C") Conference : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %7; user: %9
+  %9 = apply %8<@opened("E6CA508C-64FA-11ED-A475-96B3AA0BE17C") Conference>(%7) : $@convention(witness_method: Conference) <τ_0_0 where τ_0_0 : Conference> (@in_guaranteed τ_0_0) -> () // type-defs: %7
   %10 = integer_literal $Builtin.Word, 1          // user: %13
   %11 = integer_literal $Builtin.Int64, 1         // user: %12
   %12 = struct $Int (%11 : $Builtin.Int64)        // user: %18

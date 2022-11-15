@@ -1,5 +1,5 @@
 .PHONY: all
-all: class-inheritance class struct-protocol-conformance-requirements class-multiple-inheritance final-class struct-unoptimized struct-optimized class-protocol-conformance-empty protocol class-protocol-conformance-requirements struct-protocol-conformance-empty struct-protocol-generics struct-protocol-no-generics class-protocol-no-generics class-protocol-generics swimmer protocol-extension-optimized protocol-extension-unoptimized
+all: class-inheritance class struct-protocol-conformance-requirements class-multiple-inheritance final-class struct-unoptimized struct-optimized class-protocol-conformance-empty protocol class-protocol-conformance-requirements struct-protocol-conformance-empty struct-protocol-generics struct-protocol-no-generics class-protocol-no-generics class-protocol-generics swimmer-unoptimized swimmer-optimized protocol-extension-optimized protocol-extension-unoptimized
 
 class-inheritance:
 	swiftc -emit-sil -O src/class-inheritance.swift > out/class-inheritance.sil
@@ -46,8 +46,11 @@ class-protocol-no-generics:
 class-protocol-generics:
 	swiftc -emit-sil -O src/class-protocol-generics.swift > out/class-protocol-generics.sil
 
-swimmer:
-	swiftc -emit-sil -O src/swimmer.swift > out/swimmer.sil
+swimmer-optimized:
+	swiftc -emit-sil -O src/swimmer.swift > out/swimmer-optimized.sil
+
+swimmer-unoptimized:
+	swiftc -emit-sil -O src/swimmer.swift > out/swimmer-unoptimized.sil
 
 protocol-extension-optimized:
 	swiftc -emit-sil -O src/protocol-extension.swift > out/protocol-extension-optimized.sil
