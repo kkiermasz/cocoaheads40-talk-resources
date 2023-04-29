@@ -31,20 +31,13 @@ let unspecializedStructTime = timeOfRun(TestingStruct()) { data in unspecialized
 let specializedStructTime = timeOfRun(TestingStruct()) { data in specializedAction(data) }
 
 print("Unspecialized function calls for class took \(unspecializedClassTime.formatted())s")
-print("Specialized function calls for class took \(specializedClassTime.formatted())s")
-print("Specialized function call for classes is \((unspecializedClassTime / specializedClassTime).formatted()) times faster than unspecialized")
+print("Specialized function calls for class took   \(specializedClassTime.formatted())s")
+print("Specialized function call for classes is    \((unspecializedClassTime / specializedClassTime).formatted()) times faster than unspecialized\n")
+print("Unspecialized function calls for struct took \(unspecializedStructTime.formatted())s")
+print("Specialized function calls for struct took   \(specializedStructTime.formatted())s")
+print("Specialized function call for structs        is \((unspecializedStructTime / specializedStructTime).formatted()) times faster than unspecialized\n")
 
-print("Unspecialized function calls for class took \(unspecializedStructTime.formatted())s")
-print("Specialized function calls for class took \(specializedStructTime.formatted())s")
-print("Specialized function call for classes is \((unspecializedStructTime / specializedStructTime).formatted()) times faster than unspecialized")
-
-func timeOfRun(_ data: TestingClass, _ function: (_ data: TestingClass) -> ()) -> Double {
-  let timeBefore = CACurrentMediaTime()
-  function(data)
-  return CACurrentMediaTime() - timeBefore
-}
-
-func timeOfRun(_ data: TestingStruct, _ function: (_ data: TestingStruct) -> ()) -> Double {
+func timeOfRun<TestableType: Testable>(_ data: TestableType, _ function: (_ data: TestableType) -> ()) -> Double {
   let timeBefore = CACurrentMediaTime()
   function(data)
   return CACurrentMediaTime() - timeBefore
