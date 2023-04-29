@@ -1,6 +1,3 @@
-import Foundation
-import QuartzCore
-
 protocol Operation {
   func perform(_ val: Int) -> Int
 }
@@ -27,12 +24,21 @@ let protocolTime = timeOfRun {
   }
 }
 
-print(protocolTime)
-print(structTime)
-print("Struct function is \(structTime / protocolTime) times slower than protocol's default")
+print("\(protocolTime.formatted)s")
+print("\(structTime.formatted)s")
+print("Protocol's extension function is \((structTime / protocolTime)) times faster than accessed by protocol interface")
 
 func timeOfRun(_ function: () -> ()) -> Double {
   let timeBefore = CACurrentMediaTime()
   function()
   return CACurrentMediaTime() - timeBefore
 }
+
+extension Double {
+  var formatted: String {
+    String(format: "%.20f", self)
+  }
+}
+
+import Foundation
+import QuartzCore

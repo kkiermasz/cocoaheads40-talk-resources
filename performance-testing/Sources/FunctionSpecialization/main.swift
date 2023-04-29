@@ -1,6 +1,3 @@
-import Foundation
-import QuartzCore
-
 protocol Testable {
   init()
 }
@@ -10,7 +7,6 @@ struct TestingStruct: Testable {}
 
 func specializedAction<T: Testable>(_ item: T) {
   var array: Array<T> = []
-  
   for _ in 0..<100000 {
     array.append(item)
   }
@@ -18,7 +14,6 @@ func specializedAction<T: Testable>(_ item: T) {
 
 func unspecializedAction(_ item: any Testable) {
   var array: Array<Testable> = []
-  
   for _ in 0..<100000 {
     array.append(item)
   }
@@ -30,12 +25,16 @@ let specializedClassTime = timeOfRun(TestingClass()) { data in specializedAction
 let unspecializedStructTime = timeOfRun(TestingStruct()) { data in unspecializedAction(data) }
 let specializedStructTime = timeOfRun(TestingStruct()) { data in specializedAction(data) }
 
-print("Unspecialized function calls for class took \(unspecializedClassTime.formatted())s")
-print("Specialized function calls for class took   \(specializedClassTime.formatted())s")
-print("Specialized function call for classes is    \((unspecializedClassTime / specializedClassTime).formatted()) times faster than unspecialized\n")
-print("Unspecialized function calls for struct took \(unspecializedStructTime.formatted())s")
-print("Specialized function calls for struct took   \(specializedStructTime.formatted())s")
-print("Specialized function call for structs        is \((unspecializedStructTime / specializedStructTime).formatted()) times faster than unspecialized\n")
+print("Unspecialized function calls for class took \(unspecializedClassTime.formatted)s")
+print("Specialized function calls for class took   \(specializedClassTime.formatted)s")
+print("Specialized function call for classes is    \((unspecializedClassTime / specializedClassTime).formatted) times faster than unspecialized\n")
+print("Unspecialized function calls for struct took \(unspecializedStructTime.formatted)s")
+print("Specialized function calls for struct took   \(specializedStructTime.formatted)s")
+print("Specialized function call for structs        is \((unspecializedStructTime / specializedStructTime).formatted) times faster than unspecialized\n")
+
+
+import Foundation
+import QuartzCore
 
 func timeOfRun<TestableType: Testable>(_ data: TestableType, _ function: (_ data: TestableType) -> ()) -> Double {
   let timeBefore = CACurrentMediaTime()
@@ -47,7 +46,7 @@ let formatter = NumberFormatter()
 formatter.maximumFractionDigits = 6
 
 extension Double {
-  var asTime: String {
+  var formatted: String {
     String(format: "%f", self)
   }
 
