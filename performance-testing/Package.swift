@@ -3,6 +3,10 @@ import PackageDescription
 
 let package = Package(
   name: "MyPackage",
+  defaultLocalization: "en_US",
+  platforms: [
+      .macOS(.v12),
+  ],
   products: [
     .executable(name: "function-specialization", targets: ["FunctionSpecialization"]),
     .executable(name: "precomputation", targets: ["Precomputation"]),
